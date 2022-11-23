@@ -8,6 +8,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
@@ -19,6 +21,8 @@ public class Drivebase extends SubsystemBase {
   private CANSparkMax frontRightMotor = new CANSparkMax(DriveConstants.frontRightMotorID, MotorType.kBrushless);
   private CANSparkMax backLeftMotor = new CANSparkMax(DriveConstants.backLeftMotorID, MotorType.kBrushless);
   private CANSparkMax backRightMotor = new CANSparkMax(DriveConstants.backRightMotorID, MotorType.kBrushless);
+
+  private Solenoid shifter = new Solenoid(PneumaticsModuleType.CTREPCM, DriveConstants.shifterID);
 
   /** Creates a new Drivebase. */
   public Drivebase() {
@@ -40,7 +44,13 @@ public class Drivebase extends SubsystemBase {
     diffDrive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
   }
 
-  
+  public void arcadeDrive(double fwd, double rot){
+    diffDrive.arcadeDrive(fwd, rot, true);
+  }
+
+  public void shift(boolean b){
+    shifter.set(b);
+  }
 
   @Override
   public void periodic() {
