@@ -6,9 +6,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Deploy;
+import frc.robot.subsystems.Drivebase;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.drivebase.*;
+import frc.robot.commands.extake.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -17,6 +23,12 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  private final Drivebase drivebase = new Drivebase();
+  private final Deploy deploy = new Deploy();
+
+  private static XboxController driveStick = new XboxController(0);
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -26,6 +38,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    drivebase.setDefaultCommand(
+      new Drive(
+        drivebase,
+        () -> driveStick.getLeftY(),
+        () -> driveStick.getRightX()));
   }
 
   /**
@@ -34,7 +52,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    new JoystickButton(driveStick, Button.kLeftBumper.value).whenPressed(new ShiftDown(drivebase), true);
+    new JoystickButton(driveStick, Button.kRightBumper.value).whenPressed(new ShiftUp(drivebase), true);
+    new JoystickButton(driveStick, Button.kA.value).whenPressed(new DumpTubes(deploy), true);
+    new JoystickButton(driveStick, Button.kB.value).whenPressed(new CloseTowerExtake(deploy), true);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
