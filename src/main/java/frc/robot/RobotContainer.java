@@ -24,8 +24,8 @@ import frc.robot.commands.extake.*;
  */
 public class RobotContainer {
 
-  private final Drivebase drivebase = new Drivebase();
-  private final Deploy deploy = new Deploy();
+  public static final Drivebase drivebase = new Drivebase();
+  public static final Deploy deploy = new Deploy();
 
   private static XboxController driveStick = new XboxController(0);
 
