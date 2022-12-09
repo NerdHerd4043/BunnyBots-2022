@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ExtakeConstants;
 
-public class Deploy extends SubsystemBase {
+public class Extaker extends SubsystemBase {
   /** Creates a new Deploy. */
 
   private Solenoid extakePiston = new Solenoid(PneumaticsModuleType.CTREPCM, ExtakeConstants.dumperPistonID);
 
-  public Deploy() {}
+  public Extaker() {}
 
   public void setExtakePiston(boolean b){
     extakePiston.set(b);

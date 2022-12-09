@@ -7,10 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.Deploy;
+import frc.robot.commands.auto.AprilTagAuto;
+import frc.robot.subsystems.Extaker;
 import frc.robot.subsystems.Drivebase;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.drivebase.*;
@@ -25,14 +24,12 @@ import frc.robot.commands.extake.*;
 public class RobotContainer {
 
   public static final Drivebase drivebase = new Drivebase();
-  public static final Deploy deploy = new Deploy();
+  public static final Extaker deploy = new Extaker();
 
   private static XboxController driveStick = new XboxController(0);
 
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // The robot's subsystems and commands are defined here...  
+  private final AprilTagAuto aprilTagAuto = new AprilTagAuto(drivebase);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -66,6 +63,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return aprilTagAuto;
   }
 }

@@ -45,7 +45,11 @@ public class Drivebase extends SubsystemBase {
   }
 
   public void arcadeDrive(double fwd, double rot){
-    diffDrive.arcadeDrive(fwd, rot, true);
+    this.arcadeDrive(fwd, rot, true);
+  }
+
+  public void arcadeDrive(double fwd, double rot, boolean squaredInputs) {
+    diffDrive.arcadeDrive(fwd, rot, squaredInputs);
   }
 
   public void shift(boolean b){

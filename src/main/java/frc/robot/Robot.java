@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.ExtakeConstants;
 import frc.robot.commands.drivebase.ShiftDown;
 import frc.robot.commands.extake.CloseTowerExtake;
-import frc.robot.subsystems.Deploy;
+import frc.robot.subsystems.Extaker;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
