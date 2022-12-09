@@ -29,7 +29,7 @@ public class AprilTagAuto extends CommandBase {
   @Override
   public void execute() {
     drivebase.arcadeDrive(
-      SmartDashboard.getNumber("Drive_Value", 0), 
+      -SmartDashboard.getNumber("Drive_Value", 0), 
       SmartDashboard.getNumber("Turn_Value", 0), 
       false
     );
