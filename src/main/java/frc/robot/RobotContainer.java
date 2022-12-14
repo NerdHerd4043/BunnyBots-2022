@@ -29,6 +29,10 @@ public class RobotContainer {
 
   private static XboxController driveStick = new XboxController(0);
 
+  private static CloseTowerExtake closeExtake = new CloseTowerExtake(extaker);
+  private static ShiftDown shiftDown = new ShiftDown(drivebase);
+
+
   // The robot's subsystems and commands are defined here...  
   private final SequentialCommandGroup aprilTagAutoGroup = 
     new SequentialCommandGroup(
@@ -69,5 +73,13 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return aprilTagAutoGroup;
+  }
+
+  public Command getCloseCommand() {
+    return closeExtake;
+  }
+
+  public Command getLowGearCommand() {
+    return shiftDown;
   }
 }
