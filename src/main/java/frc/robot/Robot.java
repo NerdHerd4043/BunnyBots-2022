@@ -22,6 +22,8 @@ import frc.robot.subsystems.Extaker;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private Command closeExtake;
+  private Command shiftDown;
 
   private RobotContainer m_robotContainer;
   /**
@@ -66,6 +68,12 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    closeExtake = m_robotContainer.getCloseCommand();
+    closeExtake.schedule();
+
+    shiftDown = m_robotContainer.getLowGearCommand();
+    shiftDown.schedule();
+
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -80,6 +88,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    closeExtake = m_robotContainer.getCloseCommand();
+    closeExtake.schedule();
+
+    shiftDown = m_robotContainer.getLowGearCommand();
+    shiftDown.schedule();
+
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
