@@ -6,17 +6,21 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.commands.extake.CloseTowerExtake;
 import frc.robot.subsystems.Drivebase;
+import frc.robot.subsystems.Extaker;
 
 public class AprilTagAuto extends CommandBase {
 
   public final Drivebase drivebase;
+  public final Extaker extaker;
   /** Creates a new AprilTagAuto. */
-  public AprilTagAuto(Drivebase drivebase) {
+  public AprilTagAuto(Drivebase drivebase, Extaker extaker) {
     this.drivebase = drivebase;
+    this.extaker = extaker;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.drivebase);
+    addRequirements(this.drivebase, this.extaker);
   }
 
   // Called when the command is initially scheduled.
@@ -38,12 +42,20 @@ public class AprilTagAuto extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // WPILib recommends a few options for doing this, but I don't recommend this one
+    // The first being command groups;
+    // https://docs.wpilib.org/en/stable/docs/software/commandbased/command-groups.html
+
+    // The other option would be to require extaker properly (already done)
+    // Then just call the subsystem method directly, rather than a whole nother command.
+    // extaker.setExtakePiston(false)
+    // new CloseTowerExtake(extaker);
     SmartDashboard.putBoolean("auto_state", false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return SmartDashboard.getBoolean("Drop_Tubes", false);
   }
 }

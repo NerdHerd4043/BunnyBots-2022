@@ -11,6 +11,7 @@ import frc.robot.commands.auto.AprilTagAuto;
 import frc.robot.subsystems.Extaker;
 import frc.robot.subsystems.Drivebase;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.drivebase.*;
 import frc.robot.commands.extake.*;
@@ -24,12 +25,16 @@ import frc.robot.commands.extake.*;
 public class RobotContainer {
 
   public static final Drivebase drivebase = new Drivebase();
-  public static final Extaker deploy = new Extaker();
+  public static final Extaker extaker = new Extaker();
 
   private static XboxController driveStick = new XboxController(0);
 
   // The robot's subsystems and commands are defined here...  
-  private final AprilTagAuto aprilTagAuto = new AprilTagAuto(drivebase);
+  private final SequentialCommandGroup aprilTagAutoGroup = 
+    new SequentialCommandGroup(
+      new AprilTagAuto(drivebase, extaker), 
+      new DumpTubes(extaker)
+    );
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,8 +57,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(driveStick, Button.kLeftBumper.value).whenPressed(new ShiftDown(drivebase), true);
     new JoystickButton(driveStick, Button.kRightBumper.value).whenPressed(new ShiftUp(drivebase), true);
-    new JoystickButton(driveStick, Button.kA.value).whenPressed(new DumpTubes(deploy), true);
-    new JoystickButton(driveStick, Button.kB.value).whenPressed(new CloseTowerExtake(deploy), true);
+    new JoystickButton(driveStick, Button.kA.value).whenPressed(new DumpTubes(extaker), true);
+    new JoystickButton(driveStick, Button.kB.value).whenPressed(new CloseTowerExtake(extaker), true);
   }
 
   /**
@@ -63,6 +68,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return aprilTagAuto;
+    return aprilTagAutoGroup;
   }
 }

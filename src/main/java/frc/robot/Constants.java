@@ -30,4 +30,8 @@ public final class Constants {
     public static final class ExtakeConstants{
         public static final int dumperPistonID = 1;
     }
+
+    public static final class DashboardStrings{
+        public static final String gearMode = "Gear Mode";
+    }
 }

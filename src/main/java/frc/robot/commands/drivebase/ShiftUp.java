@@ -4,7 +4,9 @@
 
 package frc.robot.commands.drivebase;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Constants.DashboardStrings;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.Drivebase;
 
@@ -26,5 +28,6 @@ public class ShiftUp extends InstantCommand {
   @Override
   public void initialize() {
     shifter.shift(DriveConstants.Gears.highGear);
+    SmartDashboard.putString(DashboardStrings.gearMode, "High Gear");
   }
 }
