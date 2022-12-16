@@ -36,6 +36,11 @@ public class Drivebase extends SubsystemBase {
     frontLeftMotor.setIdleMode(IdleMode.kBrake);
     frontRightMotor.setIdleMode(IdleMode.kBrake);
 
+    backLeftMotor.setSmartCurrentLimit(DriveConstants.currentLimit);
+    backRightMotor.setSmartCurrentLimit(DriveConstants.currentLimit);
+    frontRightMotor.setSmartCurrentLimit(DriveConstants.currentLimit);
+    frontLeftMotor.setSmartCurrentLimit(DriveConstants.currentLimit);
+
     backLeftMotor.follow(frontLeftMotor);
     backRightMotor.follow(frontRightMotor);
 

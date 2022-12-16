@@ -19,6 +19,8 @@ public final class Constants {
         public static final int backLeftMotorID = 6;
         public static final int backRightMotorID = 3;
 
+        public static final int currentLimit = 40;
+
         public static final int shifterID = 0;
 
         public static final class Gears{
